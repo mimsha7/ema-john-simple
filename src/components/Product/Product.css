@@ -1,0 +1,27 @@
+.product {
+    display: flex;
+    text-align: left;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+
+    border-bottom: 1px solid #d3d3d3;
+}
+.item-name{
+    color: blue;
+    font-weight: 400;
+}
+.product img{
+    padding-right: 10px;
+}
+.add-btn {
+    background-color: #f0c14b;
+    color: #111;
+    width: 200px;
+    height: 26px;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    border-radius: 3px;
+    vertical-align: middle;
+}
