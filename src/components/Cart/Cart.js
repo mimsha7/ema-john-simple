@@ -1,16 +1,17 @@
 import React from 'react';
+
 import './Cart.css'
 
 const Cart = (props) => {
     const cart = props.cart;
-    const total = cart.reduce((total, prdct) => total + prdct.price, 0)  //using reduce function
+    const total = cart.reduce((total, prdct) => total + Number(prdct.price * prdct.quantity), 0);  //using reduce function
 
     // let total = 0; //regular
     // for (let i = 0; i< cart.length; i++) {
     //     const product = cart[i];
-    //     total = total + product.price;
+    //     total = total + product.price * product.quantity;
     // }
-
+    
     let shipping = 0;
     if (total > 100){
         shipping = 0;
@@ -21,9 +22,14 @@ const Cart = (props) => {
     else if (total > 0){
         shipping = 12.99;
     }
+    
+    const formatNumber = num => {
+        const precision = num.toFixed(2)
+        return Number(precision)
+    }
 
-    const tax = (total /10).toFixed(2);
-    const grandTotal = (total+shipping+Number(tax)).toFixed(2);
+    const tax = formatNumber(total /10);
+    const grandTotal = (total + shipping + Number(tax)).toFixed(2);
 
     return (
         <div className="cart-container">
@@ -32,13 +38,15 @@ const Cart = (props) => {
             <p>Items Ordered: {cart.length}</p>
         </div>
         <div className="cart-details">
-        <p>Items: ${total} </p>
+        <p>Items: ${formatNumber(total)} </p>
         <p>Shipping & Handling: ${shipping} </p>
-        <p>Total before tax: ${total+shipping}</p>
+        <p>Total before tax: ${formatNumber(total+shipping)}</p>
         <p>Estimated tax: ${tax}</p>
         <h4 className="total">Order Total: ${grandTotal}</h4>
         </div>
-        <button>Review your order</button>
+        {
+            props.children
+        }
         </div>
     )
 };
